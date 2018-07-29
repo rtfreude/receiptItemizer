@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Button } from 'react-bootstrap';
-import HeaderItems from 'components/itemizer/HeaderItems'
-import UserInputModal from './UserInputModal'
+import HeaderItems from 'components/itemizer/HeaderItems';
+import UserInputModal from './UserInputModal';
+import ReceiptInputModal from './ReceiptInputModal';
 import './header.css';
 
 class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: false,
+      showUserModal: false,
+      showReceiptModal: false,
     }
   }
 
@@ -36,7 +38,11 @@ class Header extends Component {
   }
 
   editUserInfo = () => {
-    this.setState({ showModal: true })
+    this.setState({ showUserModal: true })
+  }
+
+  addReceipt = () => {
+    this.setState({ showReceiptModal: true })
   }
 
 
@@ -69,7 +75,8 @@ class Header extends Component {
       ['Approved By:', approvedBy],
     ]
 
-    let closeModal = () => this.setState({ showModal: false });
+    let closeUserModal = () => this.setState({ showUserModal: false });
+    let closeReceiptModal = () => this.setState({ showReceiptModal: false });
 
     return (
       <div className="header-container">
@@ -102,12 +109,13 @@ class Header extends Component {
           <Button
             className="receipt-button"
             bsStyle="success"
-            onClick={this.editUserInfo}>
+            onClick={this.addReceipt}>
               Add Reciept
           </Button>
         </div>
 
-        <UserInputModal show={this.state.showModal} onHide={closeModal}/>
+        <UserInputModal show={this.state.showUserModal} onHide={closeUserModal}/>
+        <ReceiptInputModal show={this.state.showReceiptModal} onHide={closeReceiptModal}/>
       </div>
     );
   }
