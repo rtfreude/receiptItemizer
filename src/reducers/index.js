@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import userInfoReducer from 'reducers/comments';
+import userInfoReducer from 'reducers/userInfo';
 
 export default combineReducers({
   userInfo: userInfoReducer,
