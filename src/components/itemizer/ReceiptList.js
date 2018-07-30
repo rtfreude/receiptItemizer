@@ -7,18 +7,14 @@ class ReceiptList extends Component {
 
   renderReceiptRow = () => {
     let receiptList = [];
-    const {
-      companyName,
-      price,
-      date,
-    } = this.props.receipts;
-      //this.props.receipts.map(el => console.log(el.price, el.date, el.companyName))
+
     this.props.receipts.forEach((receipt, i) => {
       const {
         companyName,
         price,
         date,
       } = receipt
+
       receiptList.push(
         <ReceiptCard
           key={i}
