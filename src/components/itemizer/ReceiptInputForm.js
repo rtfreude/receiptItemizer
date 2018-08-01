@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-16-bootstrap-date-picker';
-import { ControlLabel, Button } from 'react-bootstrap';
+import { ControlLabel, Button, FormGroup, FormControl } from 'react-bootstrap';
 import * as actions from 'actions';
 import FieldGroup from 'components/itemizer/FieldGroup'
 import './userInputForm.css';
@@ -15,6 +15,7 @@ class ReceiptInputForm extends Component {
       companyName: '',
       price: '',
       date: value,
+      description: '',
     };
   }
 
@@ -27,10 +28,22 @@ class ReceiptInputForm extends Component {
   };
 
   handleDateChange = event => {
-    this.setState({ date: event });
+    const eventFormat = event.toISOString()
+    this.setState({ date: eventFormat });
   };
 
+//TODO hook this up
+  handleReceiptUpload = event => {
+    //this.setState({ companyName: event.target.value });
+  };
 
+  handleDescriptionChange = event => {
+    this.setState({ description: event.target.value });
+  };
+
+  handleCatergoryChange = event => {
+    this.setState({ category: event.target.value });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -39,6 +52,8 @@ class ReceiptInputForm extends Component {
       companyName: this.state.companyName,
       price: this.state.price,
       date: this.state.date,
+      description: this.state.description,
+      category: this.state.category,
     }
     this.props.addReceipt(receipt);
     this.props.onHide();
@@ -49,11 +64,17 @@ class ReceiptInputForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <FieldGroup
+            id="formControlsFile"
+            type="file"
+            label="Upload Receipt"
+            help="TODO"
+          />
+          <FieldGroup
             id="formControlsText"
             type="text"
             onChange={this.handleCompanyNameChange}
             value={this.state.companyName}
-            label="Name"
+            label="Merchant"
             placeholder="Company Name"
           />
           <FieldGroup
@@ -64,6 +85,29 @@ class ReceiptInputForm extends Component {
             label="Price"
             placeholder="Price"
           />
+          <FormGroup controlId="formControlsTextarea">
+            <ControlLabel>Expense Description</ControlLabel>
+            <FormControl
+              componentClass="textarea"
+              placeholder="Description of expense"
+              onChange={this.handleDescriptionChange}
+              value={this.state.description}
+            />
+          </FormGroup>
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>Category</ControlLabel>
+            <FormControl
+              componentClass="select"
+              placeholder="select"
+              onChange={this.handleCatergoryChange}
+            >
+              <option value=""></option>
+              <option value="Meals">Meals</option>
+              <option value="Travel">Travel</option>
+              <option value="Office">Office</option>
+              <option value="Misc">Misc</option>
+            </FormControl>
+          </FormGroup>
           <div className="field-dates">
             <ControlLabel>Start Date</ControlLabel>
             <DatePicker

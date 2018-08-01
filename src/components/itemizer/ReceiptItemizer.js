@@ -8,7 +8,7 @@ class ReceiptItemizer extends Component {
     return (
       <div>
         <Header />
-        <ReceiptList />
+        <ReceiptList className="receipt-list-container"/>
       </div>
     );
   }

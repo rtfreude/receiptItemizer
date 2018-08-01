@@ -13,7 +13,7 @@ class ReceiptInputModal extends Component {
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">Employee Information</Modal.Title>
+          <Modal.Title id="contained-modal-title-lg">Receipt Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ReceiptInputForm onHide={this.props.onHide}/>

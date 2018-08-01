@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReceiptCard from 'components/itemizer/ReceiptCard';
 
-
 class ReceiptList extends Component {
-
+//TODO need to deal with the case when there are no receipts
   renderReceiptRow = () => {
     let receiptList = [];
 
@@ -13,6 +12,8 @@ class ReceiptList extends Component {
         companyName,
         price,
         date,
+        description,
+        category,
       } = receipt
 
       receiptList.push(
@@ -21,10 +22,11 @@ class ReceiptList extends Component {
           companyName={companyName}
           price={price}
           date={date}
+          description={description}
+          category={category}
         />
       )
     })
-
     return receiptList
   }
 

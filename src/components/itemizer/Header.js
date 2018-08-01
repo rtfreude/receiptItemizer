@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { Button } from 'react-bootstrap';
+import { Button, Grid, Row, Col } from 'react-bootstrap';
 import HeaderItems from 'components/itemizer/HeaderItems';
 import UserInputModal from './UserInputModal';
 import ReceiptInputModal from './ReceiptInputModal';
@@ -15,7 +15,6 @@ class Header extends Component {
       showReceiptModal: false,
     }
   }
-
 
   renderRowOneHeaderItems = (headerFieldsOne) => {
     let headerEl = [];
@@ -81,46 +80,65 @@ class Header extends Component {
     return (
       <div className="header-container">
         <div className="title-container">
-          <span className="largest-text report-name-container">
-            RECEIPT ITEMIZER
-          </span>
-          <div className="name-address-container">
-            <span className="large-text">
-              COMPANY NAME
-            </span>
-            <span className="medium-text">
-              1234 My company address
-            </span>
-          </div>
-          <Button
-            className="user-button"
-            bsStyle="primary"
-            onClick={this.editUserInfo}>
-              Edit User Info
-          </Button>
+          <Grid className="grid-container">
+            <Row className="show-grid">
+              <Col xs={12} md={6}>
+                <span className="largest-text report-name-container">
+                  RECEIPT ITEMIZER
+                </span>
+              </Col>
+              <Col xs={12} md={4}>
+                <div className="name-address-container">
+                  <span className="large-text">
+                    COMPANY NAME
+                  </span>
+                  <span className="medium-text">
+                    1234 My company address
+                  </span>
+                </div>
+              </Col>
+              <Col xs={12} md={2}>
+                <Button
+                  className="user-button"
+                  bsStyle="primary"
+                  onClick={this.editUserInfo}>
+                    Edit User Info
+                </Button>
+              </Col>
+            </Row>
+          </Grid>
         </div>
         <div className="user-info-container">
-          <div className="user-info-columns">
-            {this.renderRowOneHeaderItems(headerFieldsOne)}
-          </div>
-          <div className="user-info-columns">
-            {this.renderRowTwoHeaderItems(headerFieldsTwo)}
-          </div>
-          <Button
-            className="receipt-button"
-            bsStyle="success"
-            onClick={this.addReceipt}>
-              Add Reciept
-          </Button>
+          <Grid className="grid-container">
+            <Row className="show-grid">
+              <Col xs={12} md={4}>
+                <div className="user-info-columns">
+                  {this.renderRowOneHeaderItems(headerFieldsOne)}
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+                <div className="user-info-columns">
+                  {this.renderRowTwoHeaderItems(headerFieldsTwo)}
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+                <Button
+                  className="receipt-button"
+                  bsStyle="primary"
+                  onClick={this.addReceipt}>
+                    Add Receipt
+                </Button>
+              </Col>
+            </Row>
+          </Grid>
         </div>
-
         <UserInputModal show={this.state.showUserModal} onHide={closeUserModal}/>
         <ReceiptInputModal show={this.state.showReceiptModal} onHide={closeReceiptModal}/>
       </div>
     );
   }
 }
-
+//TODO move state to container when everything is hooked up
 function mapStateToProps (state){
   return {
     userInfo: state.userInfo,

@@ -1,6 +1,50 @@
 .card-container {
+  position: relative;
   width: 100%;
-  height: 75px;
-  background-color: yellow;
+  padding: 7px;
+  background-color: lightgrey;
   border-bottom: 4px solid white;
+}
+
+.grid-container {
+  width: 100%;
+}
+
+.card-button {
+  float:right;
+  height: 30px;
+  width: 75px;
+}
+
+.delete-button {
+  margin-top: 5px;
+}
+
+.price-date-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
+
+.name-cat-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.company {
+  font-size: 20px;
+}
+
+.description {
+  min-height: 50px;
 }
