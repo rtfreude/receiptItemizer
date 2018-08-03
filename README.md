@@ -1,7 +1,7 @@
-To start the app:
--clone the report
--from the root dir, npm install
--from the root dir, yarn start
+To start the app:<br>
+-clone the report<br>
+-from the root dir, npm install<br>
+-from the root dir, yarn start<br>
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
