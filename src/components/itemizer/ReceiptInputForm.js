@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-16-bootstrap-date-picker';
+import PropTypes from 'prop-types';
 import { ControlLabel, Button, FormGroup, FormControl } from 'react-bootstrap';
 import * as actions from 'actions';
 import FieldGroup from 'components/itemizer/FieldGroup'
 import './userInputForm.css';
 
 class ReceiptInputForm extends Component {
+  static propTypes = {
+    addReceipt: PropTypes.func.isRequired,
+    onHide: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props)
 

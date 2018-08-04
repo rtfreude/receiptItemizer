@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Button, Grid, Row, Col } from 'react-bootstrap';
 import HeaderItems from 'components/itemizer/HeaderItems';
 import UserInputModal from './UserInputModal';
@@ -8,6 +9,18 @@ import ReceiptInputModal from './ReceiptInputModal';
 import './header.css';
 
 class Header extends Component {
+  static propTypes = {
+    userInfo:  PropTypes.shape({
+      name: PropTypes.string,
+      department: PropTypes.string,
+      position: PropTypes.string,
+      manager: PropTypes.string,
+      email: PropTypes.string,
+      startDate: PropTypes.string,
+      endDate: PropTypes.string,
+      approvedBy: PropTypes.string,
+    })
+  }
   constructor(props) {
     super(props)
     this.state = {

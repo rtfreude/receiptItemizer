@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import receiptImage from './receipt.jpg'
 import './receiptCard.css';
 
 class ReceiptCard extends Component {
 //TODO probably can just make function component
+  static propTypes = {
+    companyName: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string,
+  };
+
   render() {
     const {
       companyName,

@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ReceiptCard from 'components/itemizer/ReceiptCard';
 
 class ReceiptList extends Component {
 //TODO need to deal with the case when there are no receipts
+  static propTypes = {
+    companyName: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string,
+  };
+
   renderReceiptRow = () => {
     let receiptList = [];
 

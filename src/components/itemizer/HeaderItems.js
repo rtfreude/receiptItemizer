@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './headerItem.css';
 
 class HeaderItems extends Component {
+  static propTypes = {
+    field: PropTypes.string.isRequired,
+    classItem: PropTypes.string.isRequired,
+  };
 
   render() {
     const { field, classItem } = this.props;
