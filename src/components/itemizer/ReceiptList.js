@@ -6,10 +6,10 @@ import ReceiptCard from 'components/itemizer/ReceiptCard';
 class ReceiptList extends Component {
 //TODO need to deal with the case when there are no receipts
   static propTypes = {
-    companyName: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    companyName: PropTypes.string,
+    price: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes.string,
     category: PropTypes.string,
   };
 

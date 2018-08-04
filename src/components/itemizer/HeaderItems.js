@@ -4,7 +4,7 @@ import './headerItem.css';
 
 class HeaderItems extends Component {
   static propTypes = {
-    field: PropTypes.string.isRequired,
+    field: PropTypes.array.isRequired,
     classItem: PropTypes.string.isRequired,
   };
 
