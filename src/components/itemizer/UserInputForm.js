@@ -17,36 +17,60 @@ class UserInputForm extends Component {
 
     this.state = {
       name: '',
+      validName: null,
       department: '',
+      validDepartment: null,
       position: '',
+      validPosition: null,
       manager: '',
+      validManager: null,
       email: '',
+      validEmail: null,
       approvedBy: '',
+      validApproved: null,
     };
   }
 
-  handleNameChange = event => {
-    this.setState({ name: event.target.value });
+  handleNameChange = ({target: {value}}) => {
+    this.setState({
+      name: value,
+      validName: "success"
+    });
   };
 
-  handleDepartmentChange = event => {
-    this.setState({ department: event.target.value });
+  handleDepartmentChange = ({target: {value}}) => {
+    this.setState({
+      department: value,
+      validDepartment: "success"
+    });
   };
 
-  handlePositionChange = event => {
-    this.setState({ position: event.target.value });
+  handlePositionChange = ({target: {value}}) => {
+    this.setState({
+      position: value,
+      validPosition: "success"
+    });
   };
 
-  handleManagerChange = event => {
-    this.setState({ manager: event.target.value });
+  handleManagerChange = ({target: {value}}) => {
+    this.setState({
+      manager: value,
+      validManager: "success"
+    });
   };
 
-  handleEmailChange = event => {
-    this.setState({ email: event.target.value });
+  handleEmailChange = ({target: {value}}) => {
+    this.setState({
+      email: value,
+      validEmail: "success"
+    });
   };
 
-  handleLApprovedByChange = event => {
-    this.setState({ approvedBy: event.target.value });
+  handleLApprovedByChange = ({target: {value}}) => {
+    this.setState({
+      approvedBy: value,
+      validApproved: "success"
+    });
   };
 
   handleSubmit = event => {
@@ -88,49 +112,49 @@ class UserInputForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <FieldGroup
-            id="formControlsText"
+            id="formValidationSuccess2"
+            validationstate={this.state.validName}
             type="text"
             defaultValue={name}
             onChange={this.handleNameChange}
-            //value={this.state.name}
             label="Name"
             placeholder="Full name"
           />
           <FieldGroup
-            id="formControlsText"
-            type="text"
+            id="formValidationSuccess2"
+            validationstate={this.state.validDepartment}
             defaultValue={department}
             onChange={this.handleDepartmentChange}
             label="Department"
             placeholder="i.e. Engineering"
           />
           <FieldGroup
-            id="formControlsText"
-            type="text"
+            id="formValidationSuccess2"
+            validationstate={this.state.validPosition}
             defaultValue={position}
             onChange={this.handlePositionChange}
             label="Text"
             placeholder="Job Title"
           />
           <FieldGroup
-            id="formControlsText"
-            type="text"
+            id="formValidationSuccess2"
+            validationstate={this.state.validManager}
             defaultValue={manager}
             onChange={this.handleManagerChange}
             label="Superviser"
             placeholder="Direct Supervisor"
           />
           <FieldGroup
-            id="formControlsEmail"
-            type="email"
+            id="formValidationSuccess2"
+            validationstate={this.state.validEmail}
             onChange={this.handleEmailChange}
             defaultValue={email}
             label="Email address"
             placeholder="Enter email"
           />
           <FieldGroup
-            id="formControlsText"
-            type="text"
+            id="formValidationSuccess2"
+            validationstate={this.state.validApproved}
             onChange={this.handleLApprovedByChange}
             defaultValue={approvedBy}
             label="Approved By"
