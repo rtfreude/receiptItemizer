@@ -113,7 +113,7 @@ class UserInputForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={this.state.validName}
+            validationstate={name ? "success" : this.state.validName}
             type="text"
             defaultValue={name}
             onChange={this.handleNameChange}
@@ -122,7 +122,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={this.state.validDepartment}
+            validationstate={department ? "success" : this.state.validDepartment}
             defaultValue={department}
             onChange={this.handleDepartmentChange}
             label="Department"
@@ -130,7 +130,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={this.state.validPosition}
+            validationstate={position ? "success" : this.state.validPosition}
             defaultValue={position}
             onChange={this.handlePositionChange}
             label="Text"
@@ -138,7 +138,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={this.state.validManager}
+            validationstate={manager ? "success" : this.state.validManager}
             defaultValue={manager}
             onChange={this.handleManagerChange}
             label="Superviser"
@@ -146,7 +146,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={this.state.validEmail}
+            validationstate={email ? "success" : this.state.validEmail}
             onChange={this.handleEmailChange}
             defaultValue={email}
             label="Email address"
@@ -154,7 +154,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={this.state.validApproved}
+            validationstate={approvedBy ? "success" : this.state.validApproved}
             onChange={this.handleLApprovedByChange}
             defaultValue={approvedBy}
             label="Approved By"
