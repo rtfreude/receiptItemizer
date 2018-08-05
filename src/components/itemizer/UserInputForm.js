@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DatePicker from 'react-16-bootstrap-date-picker';
 import PropTypes from 'prop-types';
-import { ControlLabel, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import * as actions from 'actions';
 import FieldGroup from 'components/itemizer/FieldGroup'
 import './userInputForm.css';
@@ -16,15 +15,12 @@ class UserInputForm extends Component {
   constructor(props) {
     super(props)
 
-    let value = new Date().toISOString();
     this.state = {
       name: '',
       department: '',
       position: '',
       manager: '',
       email: '',
-      startDate: value,
-      endDate: '',
       approvedBy: '',
     };
   }
@@ -49,14 +45,6 @@ class UserInputForm extends Component {
     this.setState({ email: event.target.value });
   };
 
-  handleStartDateChange = event => {
-    this.setState({ startDate: event });
-  };
-
-  handleEndDateChange = event => {
-    this.setState({ endDate: event });
-  };
-
   handleLApprovedByChange = event => {
     this.setState({ approvedBy: event.target.value });
   };
@@ -64,16 +52,24 @@ class UserInputForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    const {
+      name,
+      department,
+      position,
+      manager,
+      email,
+      approvedBy,
+    } = this.props.userInfo
+
     let userInfo = {
-      name: this.state.name,
-      department: this.state.department,
-      position: this.state.position,
-      manager: this.state.manager,
-      email: this.state.email,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      approvedBy: this.state.approvedBy,
+      name: this.state.name || name,
+      department: this.state.department || department,
+      position: this.state.position || position,
+      manager: this.state.manager || manager,
+      email: this.state.email || email,
+      approvedBy: this.state.approvedBy || approvedBy,
     }
+
     this.props.saveUserInfo(userInfo);
     this.props.onHide();
   };
@@ -85,8 +81,6 @@ class UserInputForm extends Component {
       position,
       manager,
       email,
-      startDate,
-      endDate,
       approvedBy,
     } = this.props.userInfo
 
@@ -96,32 +90,33 @@ class UserInputForm extends Component {
           <FieldGroup
             id="formControlsText"
             type="text"
+            defaultValue={name}
             onChange={this.handleNameChange}
-            value={name ? name : this.state.name}
+            //value={this.state.name}
             label="Name"
             placeholder="Full name"
           />
           <FieldGroup
             id="formControlsText"
             type="text"
+            defaultValue={department}
             onChange={this.handleDepartmentChange}
-            value={department ? department : this.state.department}
             label="Department"
             placeholder="i.e. Engineering"
           />
           <FieldGroup
             id="formControlsText"
             type="text"
+            defaultValue={position}
             onChange={this.handlePositionChange}
-            value={position ? position : this.state.position}
             label="Text"
             placeholder="Job Title"
           />
           <FieldGroup
             id="formControlsText"
             type="text"
+            defaultValue={manager}
             onChange={this.handleManagerChange}
-            value={manager ? manager : this.state.manager}
             label="Superviser"
             placeholder="Direct Supervisor"
           />
@@ -129,7 +124,7 @@ class UserInputForm extends Component {
             id="formControlsEmail"
             type="email"
             onChange={this.handleEmailChange}
-            value={email ? email : this.state.email}
+            defaultValue={email}
             label="Email address"
             placeholder="Enter email"
           />
@@ -137,26 +132,10 @@ class UserInputForm extends Component {
             id="formControlsText"
             type="text"
             onChange={this.handleLApprovedByChange}
-            value={approvedBy ? approvedBy : this.state.approvedBy}
+            defaultValue={approvedBy}
             label="Approved By"
             placeholder="Approved By"
           />
-          <div className="field-dates">
-            <ControlLabel>Start Date</ControlLabel>
-            <DatePicker
-              id="example-datepicker"
-              value={startDate ? startDate : this.state.startDate}
-              onChange={this.handleStartDateChange}
-            />
-          </div>
-          <div className="field-dates">
-            <ControlLabel>End Date</ControlLabel>
-            <DatePicker
-              id="example-datepicker"
-              value={endDate ? endDate : this.state.endDate}
-              onChange={this.handleEndDateChange}
-            />
-          </div>
           <Button type="submit">Submit</Button>
         </form>
       </div>

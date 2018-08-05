@@ -65,13 +65,11 @@ class Header extends Component {
       position,
       manager,
       email,
-      startDate,
-      endDate,
       approvedBy,
     } = this.props.userInfo
-
-    const startDateFormatted = moment(startDate).format("MMMM Do YYYY");
-    const endDateFormatted = moment(endDate).format("MMMM Do YYYY");
+moment().startOf('week')
+    const startDateFormatted = moment().startOf('week').add(1, 'days').format("MMMM Do YYYY");
+    const endDateFormatted = moment().endOf('week').add(1, 'days').format("MMMM Do YYYY")
     //TODO: Build a component to deal with populating header columns/fields
     const headerFieldsOne = [
       ['Name:', name],
