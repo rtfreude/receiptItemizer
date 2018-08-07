@@ -22,107 +22,113 @@ class UserInputForm extends Component {
       manager: '',
       email: '',
       approvedBy: '',
-      allFieldsValid: {
-        validManager: null,
-        validName: null,
-        validDepartment: null,
-        validPosition: null,
-        validEmail: null,
-        validApproved: null,
-      },
+      validManager: null,
+      validName: null,
+      validDepartment: null,
+      validPosition: null,
+      validEmail: null,
+      validApproved: null,
       validForm: false,
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      name: this.props.userInfo.name,
+      department: this.props.userInfo.department,
+      position: this.props.userInfo.position,
+      manager: this.props.userInfo.manager,
+      email: this.props.userInfo.email,
+      approvedBy: this.props.userInfo.approvedBy,
+      validManager: this.props.userInfo.validManager,
+      validName: this.props.userInfo.validName,
+      validDepartment: this.props.userInfo.validDepartment,
+      validPosition: this.props.userInfo.validPosition,
+      validEmail: this.props.userInfo.validEmail,
+      validApproved: this.props.userInfo.validApproved,
+      validForm: this.props.userInfo.validForm,
+    })
+  }
+
   validateEmail = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const isValid = re.test(String(email).toLowerCase());
+
+    return isValid ? "success" : "error";
+  }
+
+  hasString = (string) => {
+    return string === '' ? "error" : "success";
   }
 
   handleNameChange = ({target: {value}}) => {
-    const valid = !value ? "error" : "success";
-
     this.setState({
       name: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validName: valid }
+      validName: this.hasString(value),
     })
   };
 
   handleDepartmentChange = ({target: {value}}) => {
-    const valid = !value ? "error" : "success";
-
     this.setState({
       department: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validDepartment: valid }
+      validDepartment: this.hasString(value)
     });
   };
 
   handlePositionChange = ({target: {value}}) => {
-    const valid = !value ? "error" : "success";
-
     this.setState({
       position: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validPosition: valid }
+      validPosition: this.hasString(value)
     });
   };
 
   handleManagerChange = ({target: {value}}) => {
-    const valid = !value ? "error" : "success";
-
     this.setState({
       manager: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validManager: valid}
+      validManager: this.hasString(value)
     });
   };
 
   handleEmailChange = ({target: {value}}) => {
-
-    this.validateEmail(value) ?
     this.setState({
       email: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validEmail: "success" }
-    }) :
-    this.setState({
-      email: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validEmail: "error" }
+      validEmail: this.validateEmail(value)
     })
-  };
+  }
 
   handleLApprovedByChange = ({target: {value}}) => {
-    const valid = !value ? "error" : "success";
-
     this.setState({
       approvedBy: value,
-      allFieldsValid: { ...this.state.allFieldsValid, validApproved: valid }
+      validApproved: this.hasString(value)
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const {
-      name,
-      department,
-      position,
-      manager,
-      email,
-      approvedBy,
-    } = this.props.userInfo;
 
-    const { allFieldsValid } = this.state;
-    const validForm = Object.keys(allFieldsValid).every((k) => allFieldsValid[k] === "success")
+    //TODO: do not allow submission unless form is valid
+    //const { allFieldsValid } = this.state;
+    //const validForm = Object.keys(allFieldsValid).every((k) => allFieldsValid[k] === "success")
 
-    if(!validForm) {
+    // if(!validForm) {
       //TODO: give user feedback
-      return;
-    }
-    //TODO: this needs to be fixed up...wonky logic
+    //   return;
+    // }
+
+    //TODO: clean this object up...
     let userInfo = {
-      name: this.state.name || name,
-      department: this.state.department || department,
-      position: this.state.position || position,
-      manager: this.state.manager || manager,
-      email: this.state.email || email,
-      approvedBy: this.state.approvedBy || approvedBy,
+      name: this.state.name,
+      department: this.state.department,
+      position: this.state.position,
+      manager: this.state.manager,
+      email: this.state.email,
+      approvedBy: this.state.approvedBy,
+      validName: this.state.validName,
+      validManager: this.state.validManager,
+      validDepartment: this.state.validDepartment,
+      validPosition: this.state.validPosition,
+      validEmail: this.state.validEmail,
+      validApproved: this.state.validApproved,
     }
 
     this.props.saveUserInfo(userInfo);
@@ -144,7 +150,7 @@ class UserInputForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={name ? "success" : this.state.allFieldsValid.validName}
+            validationstate={this.state.validName}
             type="text"
             defaultValue={name}
             onChange={this.handleNameChange}
@@ -153,7 +159,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={department ? "success" : this.state.allFieldsValid.validDepartment}
+            validationstate={this.state.validDepartment}
             defaultValue={department}
             onChange={this.handleDepartmentChange}
             label="Department"
@@ -161,7 +167,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={position ? "success" : this.state.allFieldsValid.validPosition}
+            validationstate={this.state.validPosition}
             defaultValue={position}
             onChange={this.handlePositionChange}
             label="Text"
@@ -169,7 +175,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={manager ? "success" : this.state.allFieldsValid.validManager}
+            validationstate={this.state.validManager}
             defaultValue={manager}
             onChange={this.handleManagerChange}
             label="Superviser"
@@ -177,7 +183,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={email ? "success" : this.state.allFieldsValid.validEmail}
+            validationstate={this.state.validEmail}
             onChange={this.handleEmailChange}
             defaultValue={email}
             label="Email address"
@@ -185,7 +191,7 @@ class UserInputForm extends Component {
           />
           <FieldGroup
             id="formValidationSuccess2"
-            validationstate={approvedBy ? "success" : this.state.allFieldsValid.validApproved}
+            validationstate={this.state.validApproved}
             onChange={this.handleLApprovedByChange}
             defaultValue={approvedBy}
             label="Approved By"
