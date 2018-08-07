@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ReceiptCard from 'components/itemizer/ReceiptCard';
 
@@ -12,6 +13,26 @@ class ReceiptList extends Component {
     description: PropTypes.string,
     category: PropTypes.string,
   };
+
+  //Hard code this for now to set up UI
+  renderSortBar = () => {
+
+      return (
+        <div className="head-container">
+          <Grid className="grid-container">
+            <Row className="show-grid">
+              <Col xs={6} md={1}>
+                <span>Column 1</span>
+              </Col>
+              <Col xs={6} md={3}>
+                <span>Column 2</span>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      );
+
+  }
 
   renderReceiptRow = () => {
     let receiptList = [];
@@ -42,7 +63,12 @@ class ReceiptList extends Component {
   render() {
     return (
       <div>
-        {this.renderReceiptRow()}
+        <div>
+          {/* {this.renderReceiptHeader()} */}
+        </div>
+        <div>
+          {this.renderReceiptRow()}
+        </div>
       </div>
     );
   }
