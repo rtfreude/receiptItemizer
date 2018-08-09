@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { Grid, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import ReceiptInputModal from 'components/itemizer/ReceiptInputModal'
 import ReceiptCard from 'components/itemizer/ReceiptCard';
 
 class ReceiptList extends Component {
@@ -20,6 +21,7 @@ class ReceiptList extends Component {
     super(props)
 
     this.state = {
+      showReceiptModal: false,
       receiptList: [],
     };
   }
@@ -58,6 +60,11 @@ class ReceiptList extends Component {
     this.props.deleteReceipt(event.target.id)
   }
 
+  //TODO:This is wired up but currently adds receipts rather then edit, just needs to be finished off.
+  editReceipt = (event) => {
+    this.setState({ showReceiptModal: true })
+  }
+
   renderReceiptRow = () => {
     let renderedReceiptList = []
 
@@ -81,6 +88,7 @@ class ReceiptList extends Component {
           description={description}
           category={category}
           deleteReceipt={this.deleteReceipt}
+          editReceipt={this.editReceipt}
         />
       )
     })
@@ -88,6 +96,7 @@ class ReceiptList extends Component {
   }
 
   render() {
+    let closeReceiptModal = () => this.setState({ showReceiptModal: false });
     return (
       <div>
         <div>
@@ -95,6 +104,7 @@ class ReceiptList extends Component {
         </div>
         <div>
           {this.renderReceiptRow()}
+          <ReceiptInputModal show={this.state.showReceiptModal} onHide={closeReceiptModal}/>
         </div>
       </div>
     );
