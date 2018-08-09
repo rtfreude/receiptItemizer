@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import DatePicker from 'react-16-bootstrap-date-picker';
 import PropTypes from 'prop-types';
 import { ControlLabel, Button, FormGroup, FormControl } from 'react-bootstrap';
@@ -16,12 +17,16 @@ class ReceiptInputForm extends Component {
   constructor(props) {
     super(props)
 
-    let value = new Date().toISOString();
+    const value = new Date().toISOString();
+    const uid = _.uniqueId('rec_');
+
     this.state = {
+      uid: uid,
       companyName: '',
       price: '',
       date: value,
       description: '',
+      category: '',
     };
   }
 
@@ -55,6 +60,7 @@ class ReceiptInputForm extends Component {
     event.preventDefault();
 
     let receipt = {
+      uid: this.state.uid,
       companyName: this.state.companyName,
       price: this.state.price,
       date: this.state.date,

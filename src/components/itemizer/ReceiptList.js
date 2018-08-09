@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from 'actions';
 import { Grid, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ReceiptCard from 'components/itemizer/ReceiptCard';
@@ -7,12 +8,31 @@ import ReceiptCard from 'components/itemizer/ReceiptCard';
 class ReceiptList extends Component {
 //TODO need to deal with the case when there are no receipts
   static propTypes = {
+    uid: PropTypes.string,
     companyName: PropTypes.string,
     price: PropTypes.string,
     date: PropTypes.string,
     description: PropTypes.string,
     category: PropTypes.string,
   };
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      receiptList: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({receiptList: this.props.receipts})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.receipts !== this.state.receiptList) {
+      this.setState({receiptList: nextProps.receipts})
+    }
+  }
 
   //Hard code this for now to set up UI
   renderSortBar = () => {
@@ -34,11 +54,16 @@ class ReceiptList extends Component {
 
   }
 
-  renderReceiptRow = () => {
-    let receiptList = [];
+  deleteReceipt = (event) => {
+    this.props.deleteReceipt(event.target.id)
+  }
 
-    this.props.receipts.forEach((receipt, i) => {
+  renderReceiptRow = () => {
+    let renderedReceiptList = []
+
+    this.state.receiptList.forEach((receipt) => {
       const {
+        uid,
         companyName,
         price,
         date,
@@ -46,18 +71,20 @@ class ReceiptList extends Component {
         category,
       } = receipt
 
-      receiptList.push(
+      renderedReceiptList.push(
         <ReceiptCard
-          key={i}
+          uid={uid}
+          key={uid}
           companyName={companyName}
           price={price}
           date={date}
           description={description}
           category={category}
+          deleteReceipt={this.deleteReceipt}
         />
       )
     })
-    return receiptList
+    return renderedReceiptList
   }
 
   render() {
@@ -80,4 +107,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ReceiptList);
+export default connect(mapStateToProps, actions)(ReceiptList);

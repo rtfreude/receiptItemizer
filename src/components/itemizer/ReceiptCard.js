@@ -17,13 +17,15 @@ class ReceiptCard extends Component {
 
   render() {
     const {
+      uid,
       companyName,
       price,
       date,
       description,
       category,
+      deleteReceipt,
     } = this.props;
-
+    console.log(this.props)
     const dateFormatted = moment(date).format("MMMM Do YYYY");
     return (
       <div className="card-container">
@@ -50,7 +52,7 @@ class ReceiptCard extends Component {
             <Col xs={6} md={1}>
               <div className="button-container">
                 <Button className="card-button">Edit</Button>
-                <Button className="card-button delete-button">Delete</Button>
+                <Button onClick={deleteReceipt} id={uid} className="card-button delete-button">Delete</Button>
               </div>
             </Col>
           </Row>
