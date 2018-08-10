@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import ReceiptInputModal from 'components/itemizer/ReceiptInputModal'
 import ReceiptCard from 'components/itemizer/ReceiptCard';
+import './receiptList.css'
 
 class ReceiptList extends Component {
 //TODO need to deal with the case when there are no receipts
@@ -40,22 +41,20 @@ class ReceiptList extends Component {
 
   //Hard code this for now to set up UI
   renderSortBar = () => {
-
-      return (
-        <div className="head-container">
-          <Grid className="grid-container">
-            <Row className="show-grid">
-              <Col xs={6} md={1}>
-                <span>Column 1</span>
-              </Col>
-              <Col xs={6} md={3}>
-                <span>Column 2</span>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-      );
-
+    return (
+      <div className="head-container">
+        <Grid className="grid-container">
+          <Row className="show-grid">
+            <Col xs={6} md={1}>
+              <span>Column 1</span>
+            </Col>
+            <Col xs={6} md={3}>
+              <span>Column 2</span>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
   }
 
   deleteReceipt = (event) => {
@@ -115,13 +114,14 @@ class ReceiptList extends Component {
   render() {
     const closeReceiptModal = () => this.setState({ showReceiptModal: false });
     const editing = this.state.editModal ? 'true' : 'false';
+
     return (
-      <div>
+      <div className="receipt-holder">
         <div>
           {/* {this.renderReceiptHeader()} */}
         </div>
         <div>
-          {this.renderReceiptRow()}
+          {this.state.receiptList.length > 0 ? this.renderReceiptRow() : <span>Please click the 'Add Receipt' to get started</span>}
           <ReceiptInputModal
             editing={editing}
             onHide={closeReceiptModal}

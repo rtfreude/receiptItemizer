@@ -1,9 +1,14 @@
 .card-container {
   position: relative;
+  border-radius: 8px;
+  border: 1px solid black;
   width: 100%;
   padding: 7px;
+  margin-bottom: 5px;
   background-color: lightgrey;
-  border-bottom: 4px solid white;
+  div:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .grid-container {
