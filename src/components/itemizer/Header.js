@@ -21,8 +21,10 @@ class Header extends Component {
       approvedBy: PropTypes.string,
     })
   }
+
   constructor(props) {
     super(props)
+
     this.state = {
       showUserModal: false,
       showReceiptModal: false,
@@ -56,7 +58,6 @@ class Header extends Component {
   addReceipt = () => {
     this.setState({ showReceiptModal: true })
   }
-
 
   render() {
     const {

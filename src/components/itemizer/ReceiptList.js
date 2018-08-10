@@ -21,9 +21,11 @@ class ReceiptList extends Component {
     super(props)
 
     this.state = {
+      editModal: false,
       showReceiptModal: false,
       receiptList: [],
-    };
+      editreceipt: {},
+    }
   }
 
   componentDidMount() {
@@ -61,8 +63,23 @@ class ReceiptList extends Component {
   }
 
   //TODO:This is wired up but currently adds receipts rather then edit, just needs to be finished off.
-  editReceipt = (event) => {
-    this.setState({ showReceiptModal: true })
+  // editReceipt = (event) => {
+  //
+  //   console.log('to edit receipt')
+  //   //console.log(this.props.updateReceipt(event.target.id))
+  //   this.setState({ showReceiptModal: false })
+  // }
+
+  getReceipt = (event) => {
+    this.props.receipts.forEach((receipt) => {
+      if(receipt.uid === event.target.id) {
+        this.setState({
+          editModal: true,
+          showReceiptModal: true,
+          editreceipt: receipt,
+        })
+      }
+    })
   }
 
   renderReceiptRow = () => {
@@ -88,7 +105,7 @@ class ReceiptList extends Component {
           description={description}
           category={category}
           deleteReceipt={this.deleteReceipt}
-          editReceipt={this.editReceipt}
+          getReceipt={this.getReceipt}
         />
       )
     })
@@ -96,7 +113,8 @@ class ReceiptList extends Component {
   }
 
   render() {
-    let closeReceiptModal = () => this.setState({ showReceiptModal: false });
+    const closeReceiptModal = () => this.setState({ showReceiptModal: false });
+    const editing = this.state.editModal ? 'true' : 'false';
     return (
       <div>
         <div>
@@ -104,7 +122,13 @@ class ReceiptList extends Component {
         </div>
         <div>
           {this.renderReceiptRow()}
-          <ReceiptInputModal show={this.state.showReceiptModal} onHide={closeReceiptModal}/>
+          <ReceiptInputModal
+            editing={editing}
+            onHide={closeReceiptModal}
+            show={this.state.showReceiptModal}
+            getreceipt={this.getreceipt}
+            editreceipt={this.state.editreceipt}
+          />
         </div>
       </div>
     );

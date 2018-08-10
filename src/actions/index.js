@@ -1,6 +1,7 @@
 import { SAVE_USER_INFO } from 'actions/types';
 import { ADD_RECEIPT } from 'actions/types';
 import { DELETE_RECEIPT } from 'actions/types';
+import { UPDATE_RECEIPT } from 'actions/types';
 
 export function saveUserInfo(userInfo) {
   return {
@@ -19,6 +20,13 @@ export function addReceipt(receipt) {
 export function deleteReceipt(id) {
   return {
     type: DELETE_RECEIPT,
+    payload: id,
+  };
+}
+
+export function updateReceipt(id) {
+  return {
+    type: UPDATE_RECEIPT,
     payload: id,
   };
 }

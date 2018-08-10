@@ -14,7 +14,7 @@ class UserInputForm extends Component {
 
   constructor(props) {
     super(props)
-
+    //really need to clean up this state...
     this.state = {
       name: '',
       department: '',

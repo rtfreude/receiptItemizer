@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import _ from 'lodash';
 import DatePicker from 'react-16-bootstrap-date-picker';
 import PropTypes from 'prop-types';
@@ -18,16 +19,27 @@ class ReceiptInputForm extends Component {
     super(props)
 
     const value = new Date().toISOString();
-    const uid = _.uniqueId('rec_');
 
     this.state = {
-      uid: uid,
+      uid: '',
       companyName: '',
       price: '',
       date: value,
       description: '',
       category: '',
     };
+  }
+
+  componentDidMount() {
+    const uid = _.uniqueId('rec_');
+
+    this.props.editing ? this.setState({
+      uid: this.props.editreceipt.uid,
+      companyName: this.props.editreceipt.companyName,
+      price: this.props.editreceipt.price,
+      description: this.props.editreceipt.description,
+      category: this.props.editreceipt.category,
+    }) : this.setState({uid: uid});
   }
 
   handleCompanyNameChange = event => {
@@ -39,7 +51,7 @@ class ReceiptInputForm extends Component {
   };
 
   handleDateChange = event => {
-    const eventFormat = event.toISOString()
+    const eventFormat = moment(event).toISOString()
     this.setState({ date: eventFormat });
   };
 
@@ -52,14 +64,14 @@ class ReceiptInputForm extends Component {
     this.setState({ description: event.target.value });
   };
 
-  handleCatergoryChange = event => {
+  handleCategoryChange = event => {
     this.setState({ category: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    let receipt = {
+    const receipt = {
       uid: this.state.uid,
       companyName: this.state.companyName,
       price: this.state.price,
@@ -67,7 +79,8 @@ class ReceiptInputForm extends Component {
       description: this.state.description,
       category: this.state.category,
     }
-    this.props.addReceipt(receipt);
+
+    !this.props.editing ? this.props.addReceipt(receipt) : this.props.updateReceipt(receipt);
     this.props.onHide();
   };
 
@@ -85,7 +98,7 @@ class ReceiptInputForm extends Component {
             id="formControlsText"
             type="text"
             onChange={this.handleCompanyNameChange}
-            value={this.state.companyName}
+            defaultValue={this.state.companyName}
             label="Merchant"
             placeholder="Company Name"
           />
@@ -93,7 +106,7 @@ class ReceiptInputForm extends Component {
             id="formControlsText"
             type="text"
             onChange={this.handlePriceChange}
-            value={this.state.price}
+            defaultValue={this.state.price}
             label="Price"
             placeholder="Price"
           />
@@ -111,9 +124,9 @@ class ReceiptInputForm extends Component {
             <FormControl
               componentClass="select"
               placeholder="select"
-              onChange={this.handleCatergoryChange}
+              onChange={this.handleCategoryChange}
             >
-              <option value=""></option>
+              <option value={this.state}>{this.state.category}</option>
               <option value="Meals">Meals</option>
               <option value="Travel">Travel</option>
               <option value="Office">Office</option>

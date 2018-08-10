@@ -16,7 +16,12 @@ class ReceiptInputModal extends Component {
           <Modal.Title id="contained-modal-title-lg">Receipt Information</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ReceiptInputForm onHide={this.props.onHide}/>
+          <ReceiptInputForm
+            editing={this.props.editing}
+            show={this.props.show}
+            onHide={this.props.onHide}
+            editreceipt={this.props.editreceipt}
+          />
         </Modal.Body>
       </Modal>
     );

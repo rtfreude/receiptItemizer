@@ -24,10 +24,10 @@ class ReceiptCard extends Component {
       description,
       category,
       deleteReceipt,
-      editReceipt,
+      getReceipt,
     } = this.props;
     const dateFormatted = moment(date).format("MMMM Do YYYY");
-    
+
     return (
       <div className="card-container">
         <Grid className="grid-container">
@@ -52,7 +52,7 @@ class ReceiptCard extends Component {
             </Col>
             <Col xs={6} md={1}>
               <div className="button-container">
-                <Button onClick={editReceipt} className="card-button">Edit</Button>
+                <Button onClick={getReceipt} id={uid} className="card-button">Edit</Button>
                 <Button onClick={deleteReceipt} id={uid} className="card-button delete-button">Delete</Button>
               </div>
             </Col>
