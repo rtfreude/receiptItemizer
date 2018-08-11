@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Button, Grid, Row, Col } from 'react-bootstrap';
+import * as actions from 'actions';
 import HeaderItems from 'components/itemizer/HeaderItems';
 import UserInputModal from './UserInputModal';
 import ReceiptInputModal from './ReceiptInputModal';
+import ReceiptControls from 'components/itemizer/ReceiptControls';
 import './header.css';
 
 class Header extends Component {
@@ -57,6 +59,32 @@ class Header extends Component {
 
   addReceipt = () => {
     this.setState({ showReceiptModal: true })
+  }
+
+  comparePrice = (a,b) => {
+    if (a.price < b.price)
+      return -1;
+    if (a.price > b.price)
+      return 1;
+    return 0;
+  }
+
+  sortPriceAsc = () => {
+    const priceSortAsc = this.props.receipts.sort(this.comparePrice);
+
+    this.props.priceAsc(priceSortAsc);
+  }
+
+  sortPriceDesc = () => {
+    console.log('test')
+  }
+
+  sortCatAsc = () => {
+    console.log('test')
+  }
+
+  sortCatDesc = () => {
+    console.log('test')
   }
 
   render() {
@@ -123,27 +151,27 @@ class Header extends Component {
         <div className="user-info-container">
           <Grid className="grid-container">
             <Row className="show-grid">
-              <Col xs={12} md={4}>
+              <Col xs={12} md={6}>
                 <div className="user-info-columns">
                   {this.renderRowOneHeaderItems(headerFieldsOne)}
                 </div>
               </Col>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={6}>
                 <div className="user-info-columns">
                   {this.renderRowTwoHeaderItems(headerFieldsTwo)}
                 </div>
               </Col>
-              <Col xs={12} md={4}>
-                <Button
-                  className="receipt-button"
-                  bsStyle="primary"
-                  onClick={this.addReceipt}>
-                    Add Receipt
-                </Button>
-              </Col>
             </Row>
           </Grid>
         </div>
+        <ReceiptControls
+          className="receipt-button"
+          addReceipt={this.addReceipt}
+          sortPriceAsc={this.sortPriceAsc}
+          sortPriceDesc={this.sortPriceDesc}
+          sortCatAsc={this.sortCatAsc}
+          sortCatDesc={this.sortCatDesc}
+        />
         <UserInputModal show={this.state.showUserModal} onHide={closeUserModal}/>
         <ReceiptInputModal show={this.state.showReceiptModal} onHide={closeReceiptModal}/>
       </div>
@@ -154,7 +182,8 @@ class Header extends Component {
 function mapStateToProps (state){
   return {
     userInfo: state.userInfo,
+    receipts: state.receipts
   }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

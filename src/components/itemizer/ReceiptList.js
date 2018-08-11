@@ -34,6 +34,7 @@ class ReceiptList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     if (nextProps.receipts !== this.state.receiptList) {
       this.setState({receiptList: nextProps.receipts})
     }
@@ -121,7 +122,7 @@ class ReceiptList extends Component {
           {/* {this.renderReceiptHeader()} */}
         </div>
         <div>
-          {this.state.receiptList.length > 0 ? this.renderReceiptRow() : <span>Please click the 'Add Receipt' to get started</span>}
+          {this.state.receiptList.length > 0 ? this.renderReceiptRow() : <span>Please click the 'Add Receipt' button to get started.</span>}
           <ReceiptInputModal
             editing={editing}
             onHide={closeReceiptModal}

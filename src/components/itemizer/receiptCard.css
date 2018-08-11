@@ -6,9 +6,6 @@
   padding: 7px;
   margin-bottom: 5px;
   background-color: lightgrey;
-  div:last-child {
-    margin-bottom: 0;
-  }
 }
 
 .grid-container {
