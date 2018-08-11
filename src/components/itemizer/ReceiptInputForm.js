@@ -32,8 +32,9 @@ class ReceiptInputForm extends Component {
 
   componentDidMount() {
     const uid = _.uniqueId('rec_');
+    const isEditing = this.props.editing === 'true' ? true : false;
 
-    this.props.editing ? this.setState({
+    isEditing ? this.setState({
       uid: this.props.editreceipt.uid,
       companyName: this.props.editreceipt.companyName,
       price: this.props.editreceipt.price,
@@ -80,7 +81,10 @@ class ReceiptInputForm extends Component {
       category: this.state.category,
     }
 
-    !this.props.editing ? this.props.addReceipt(receipt) : this.props.updateReceipt(receipt);
+    const isEditing = this.props.editing === 'true' ? true : false;
+    isEditing ? this.props.updateReceipt(receipt) : this.props.addReceipt(receipt);
+
+    this.props.receiptEditing(false)
     this.props.onHide();
   };
 
@@ -148,5 +152,5 @@ class ReceiptInputForm extends Component {
   }
 }
 
-//temporarliy connect the component to wire everything up...will be moved to it's container
+//temporarily connect the component to wire everything up...will be moved to it's container
 export default connect(null, actions)(ReceiptInputForm);

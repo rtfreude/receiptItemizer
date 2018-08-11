@@ -4,6 +4,7 @@ import { Button, Row, Col, Glyphicon } from 'react-bootstrap';
 import './receiptControls.css';
 
 class ReceiptControls extends Component {
+  //TODO  need to get these set
   // static propTypes = {
   //
   // };
@@ -23,7 +24,7 @@ class ReceiptControls extends Component {
         <Row>
           <Col xs={6} md={3}>
             <div >
-              <span className="control-sort-label">Sort by category</span>
+              <span className="control-sort-label">Sort by price</span>
               <div className="sort-buttons">
                 <Button
                   bsSize="xsmall"
@@ -45,7 +46,7 @@ class ReceiptControls extends Component {
           </Col>
           <Col xs={6} md={3}>
             <div>
-              <span className="control-sort-label">Sort by price</span>
+              <span className="control-sort-label">Sort by categor</span>
               <div className="sort-buttons">
                 <Button
                   bsSize="xsmall"

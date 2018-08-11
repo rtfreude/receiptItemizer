@@ -1,4 +1,10 @@
-import { ADD_RECEIPT, DELETE_RECEIPT, UPDATE_RECEIPT, SORT_PRICE_ASC } from 'actions/types';
+import {
+  ADD_RECEIPT,
+  DELETE_RECEIPT,
+  UPDATE_RECEIPT,
+  SORT_PRICE,
+  SORT_CAT,
+} from 'actions/types';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -19,8 +25,10 @@ export default function(state = [], action) {
         }
         return receipt;
       })
-    case SORT_PRICE_ASC:
-      return action.payload;
+    case SORT_PRICE:
+      return [...state]
+    case SORT_CAT:
+      return [...state]
     default:
       return state;
   }

@@ -6,8 +6,6 @@ import { Button, Grid, Row, Col } from 'react-bootstrap';
 import * as actions from 'actions';
 import HeaderItems from 'components/itemizer/HeaderItems';
 import UserInputModal from './UserInputModal';
-import ReceiptInputModal from './ReceiptInputModal';
-import ReceiptControls from 'components/itemizer/ReceiptControls';
 import './header.css';
 
 class Header extends Component {
@@ -29,7 +27,6 @@ class Header extends Component {
 
     this.state = {
       showUserModal: false,
-      showReceiptModal: false,
     }
   }
 
@@ -55,36 +52,6 @@ class Header extends Component {
 
   editUserInfo = () => {
     this.setState({ showUserModal: true })
-  }
-
-  addReceipt = () => {
-    this.setState({ showReceiptModal: true })
-  }
-
-  comparePrice = (a,b) => {
-    if (a.price < b.price)
-      return -1;
-    if (a.price > b.price)
-      return 1;
-    return 0;
-  }
-
-  sortPriceAsc = () => {
-    const priceSortAsc = this.props.receipts.sort(this.comparePrice);
-
-    this.props.priceAsc(priceSortAsc);
-  }
-
-  sortPriceDesc = () => {
-    console.log('test')
-  }
-
-  sortCatAsc = () => {
-    console.log('test')
-  }
-
-  sortCatDesc = () => {
-    console.log('test')
   }
 
   render() {
@@ -115,7 +82,6 @@ class Header extends Component {
     ]
 
     let closeUserModal = () => this.setState({ showUserModal: false });
-    let closeReceiptModal = () => this.setState({ showReceiptModal: false });
 
     return (
       <div className="header-container">
@@ -164,16 +130,7 @@ class Header extends Component {
             </Row>
           </Grid>
         </div>
-        <ReceiptControls
-          className="receipt-button"
-          addReceipt={this.addReceipt}
-          sortPriceAsc={this.sortPriceAsc}
-          sortPriceDesc={this.sortPriceDesc}
-          sortCatAsc={this.sortCatAsc}
-          sortCatDesc={this.sortCatDesc}
-        />
         <UserInputModal show={this.state.showUserModal} onHide={closeUserModal}/>
-        <ReceiptInputModal show={this.state.showReceiptModal} onHide={closeReceiptModal}/>
       </div>
     );
   }
