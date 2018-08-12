@@ -70,24 +70,27 @@ class ReceiptList extends Component {
   }
 
   comparePriceAsc = (a,b) => {
-    if (a.price < b.price)
+    if (parseInt(a.price,10) < parseInt(b.price,10))
       return -1;
-    if (a.price > b.price)
+    if (parseInt(a.price,10) > parseInt(b.price,10))
       return 1;
     return 0;
   }
 
   comparePriceDesc = (a,b) => {
-    if (a.price > b.price)
+    if (parseInt(a.price, 10) > parseInt(b.price, 10))
       return -1;
-    if (a.price < b.price)
+    if (parseInt(a.price, 10) < parseInt(b.price,10))
       return 1;
     return 0;
   }
 
   sortPriceAsc = () => {
-    const priceSortAsc = this.props.receipts.sort(this.comparePriceAsc);
-
+    console.log('receipts')
+    console.log(this.props.receipts)
+    let priceSortAsc = this.props.receipts.sort(this.comparePriceAsc);
+    console.log('sorted receipts')
+    console.log(priceSortAsc)
     this.props.sortPrice(priceSortAsc);
   }
 
