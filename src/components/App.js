@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import ExpenseReport from 'components/expenseReport/ExpenseReport';
-import ReceiptItemizer from 'components/itemizer/ReceiptItemizer';
+import ReceiptItemizer from 'components/itemizer/receipts/ReceiptItemizer';
 
 class App extends Component {
 

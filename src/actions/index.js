@@ -4,7 +4,7 @@ import { DELETE_RECEIPT } from 'actions/types';
 import { UPDATE_RECEIPT } from 'actions/types';
 import { SORT_PRICE } from 'actions/types';
 import { RECEIPT_EDITING } from 'actions/types';
-import { SORT_CAT} from 'actions/types';
+import { SORT_CAT } from 'actions/types';
 
 export function saveUserInfo(userInfo) {
   return {

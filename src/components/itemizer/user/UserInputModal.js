@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import UserInputForm from 'components/itemizer/UserInputForm';
+import UserInputForm from 'components/itemizer/user/UserInputForm';
 
 class UserInputModal extends Component {
 

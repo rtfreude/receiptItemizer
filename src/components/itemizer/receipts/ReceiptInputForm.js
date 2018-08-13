@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { ControlLabel, Button, FormGroup, FormControl } from 'react-bootstrap';
 import * as actions from 'actions';
 import FieldGroup from 'components/itemizer/FieldGroup'
-import './userInputForm.css';
+import './receiptInputForm.css';
 
 class ReceiptInputForm extends Component {
   static propTypes = {
@@ -27,6 +27,7 @@ class ReceiptInputForm extends Component {
       date: value,
       description: '',
       category: '',
+      validPrice: '',
     };
   }
 

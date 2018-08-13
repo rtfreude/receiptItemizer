@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button, Grid, Row, Col } from 'react-bootstrap';
 import * as actions from 'actions';
 import HeaderItems from 'components/itemizer/HeaderItems';
-import UserInputModal from './UserInputModal';
+import UserInputModal from './user/UserInputModal';
 import './header.css';
 
 class Header extends Component {

@@ -11,10 +11,12 @@ export default function(state = [], action) {
     case ADD_RECEIPT:
       return [...state, action.payload];
     case DELETE_RECEIPT:
-      return state.filter(receipt => receipt.uid !== action.payload);
+      const delContent = state.slice();
+      return delContent.filter(receipt => receipt.uid !== action.payload);
     case UPDATE_RECEIPT:
-      return state.map((receipt) => {
-        if(receipt.uid === action.payload.uid) {
+      const upState = state.slice();
+      return upState.map((receipt) => {
+        if(state.uid === action.payload.uid) {
           //skip the date for now...
           return { ...action.payload,
                   companyName: action.payload.companyName,

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { Grid, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import ReceiptInputModal from 'components/itemizer/ReceiptInputModal'
-import ReceiptCard from 'components/itemizer/ReceiptCard';
-import ReceiptControls from 'components/itemizer/ReceiptControls';
+import ReceiptInputModal from 'components/itemizer/receipts/ReceiptInputModal'
+import ReceiptCard from 'components/itemizer/receipts/ReceiptCard';
+import ReceiptControls from 'components/itemizer/receipts/ReceiptControls';
 import './receiptList.css'
 
 class ReceiptList extends Component {

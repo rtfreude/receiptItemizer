@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import ReceiptInputForm from 'components/itemizer/ReceiptInputForm';
+import ReceiptInputForm from 'components/itemizer/receipts/ReceiptInputForm';
 
 class ReceiptInputModal extends Component {
 

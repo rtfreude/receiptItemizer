@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from 'components/itemizer/Header';
-import ReceiptList from 'components/itemizer/ReceiptList';
+import ReceiptList from 'components/itemizer/receipts/ReceiptList';
 
 class ReceiptItemizer extends Component {
 

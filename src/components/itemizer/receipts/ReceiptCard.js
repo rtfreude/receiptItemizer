@@ -46,7 +46,7 @@ class ReceiptCard extends Component {
             </Col>
             <Col xs={6} md={2}>
               <div className="price-date-container">
-                <span className="price">{price}</span>
+                <span className="price">{`$${price}`}</span>
                 <span>{dateFormatted}</span>
               </div>
             </Col>
