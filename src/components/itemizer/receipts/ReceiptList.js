@@ -86,11 +86,8 @@ class ReceiptList extends Component {
   }
 
   sortPriceAsc = () => {
-    console.log('receipts')
-    console.log(this.props.receipts)
     let priceSortAsc = this.props.receipts.sort(this.comparePriceAsc);
-    console.log('sorted receipts')
-    console.log(priceSortAsc)
+
     this.props.sortPrice(priceSortAsc);
   }
 

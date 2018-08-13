@@ -11,12 +11,10 @@ export default function(state = [], action) {
     case ADD_RECEIPT:
       return [...state, action.payload];
     case DELETE_RECEIPT:
-      const delContent = state.slice();
-      return delContent.filter(receipt => receipt.uid !== action.payload);
+      return [...state.filter(receipt => receipt.uid !== action.payload)];
     case UPDATE_RECEIPT:
-      const upState = state.slice();
-      return upState.map((receipt) => {
-        if(state.uid === action.payload.uid) {
+      return [...state.map((receipt) => {
+        if(receipt.uid === action.payload.uid) {
           //skip the date for now...
           return { ...action.payload,
                   companyName: action.payload.companyName,
@@ -25,12 +23,12 @@ export default function(state = [], action) {
                   category: action.payload.category,
                 };
         }
-        return receipt;
-      })
+      return receipt;
+      })]
     case SORT_PRICE:
-      return [...state]
+      return [...action.payload]
     case SORT_CAT:
-      return [...state]
+      return [...action.payload]
     default:
       return state;
   }
