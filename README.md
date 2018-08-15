@@ -1,5 +1,5 @@
 ## To start the app:<br>
--clone the report<br>
+-clone the repo<br>
 -from the root dir, npm install<br>
 -from the root dir, yarn start<br>
 
